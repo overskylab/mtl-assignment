@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: default
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - sa.yaml
+  - ingress.yaml
+  - pdb.yaml
+images:
+  - name: overskylab/mtl-assignment
+    newTag: 1.0.0
+replicas:
+  - name: app-api
+    count: 2

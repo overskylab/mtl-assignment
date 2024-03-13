@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+  labels:
+    app.kubernetes.io/component: api
+    app.kubernetes.io/name: app-api
+    app.kubernetes.io/part-of: app
+  name: app-api
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app-api.local
+      http:
+        paths:
+          - backend:
+              service:
+                name: app-api
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
